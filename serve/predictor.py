@@ -15,16 +15,28 @@ BACKEND_MODULE = os.environ["BACKEND_MODULE"]
 
 
 def get_engine_backend():
-    if BACKEND_MODULE == 'ONNX':
-        from modules.onnx_engine import ONNXModule
-        EngineSegment = ONNXModule("weights/model.onnx")
-        return EngineSegment
-    elif BACKEND_MODULE == 'TENSORRT':
-        from modules.trt_engine import TRTModule
-        EngineSegment = TRTModule("weights/model.engine")
-        return EngineSegment
-    else:
-        raise Exception("Please set up the BACKEND_MODULE environment variable as ONNX or TENSORRT") 
+    """
+    Dynamically imports and returns the appropriate engine module and class based on the BACKEND_MODULE setting.
+
+    Raises:
+        ValueError: If BACKEND_MODULE is not set to a supported engine type.
+
+    Returns:
+        An instance of the appropriate engine class with the model loaded.
+    """
+    engine_backends = {
+        'ONNX': ('modules.onnx_engine', 'ONNXModule'),
+        'TENSORRT': ('modules.trt_engine', 'TRTModule'),
+    }
+
+    try:
+        module_name, class_name = engine_backends[BACKEND_MODULE]
+    except KeyError:
+        raise ValueError("Unsupported BACKEND_MODULE. Please set it to either 'ONNX' or 'TENSORRT'.")
+
+    module = __import__(module_name, fromlist=[class_name])
+    EngineClass = getattr(module, class_name)
+    return EngineClass("weights/model." + ("onnx" if BACKEND_MODULE == 'ONNX' else "engine"))
 
 
 InferenceEngine = get_engine_backend()
