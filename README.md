@@ -75,7 +75,7 @@ curl -X POST http://localhost:8080/api/yolo8-coco-segmentation \
 ```
 
 ```bash
-Using a Python Script
+#Using a Python Script
 python service_test.py
 ```
 
