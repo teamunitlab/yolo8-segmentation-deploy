@@ -8,7 +8,7 @@ def main():
     logging.basicConfig(level=logging.INFO)
 
     # Use environment variable for URL or a direct string if not available
-    url = os.getenv("API_URL", "http://localhost:8080/api/yolo8-coco-segmentation")
+    url = os.getenv("API_URL", "http://localhost:8080/api/yolo8/coco-segmentation")
 
     # Define the payload with the source image, a random from web
     payload = {

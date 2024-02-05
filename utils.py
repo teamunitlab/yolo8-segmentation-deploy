@@ -238,11 +238,11 @@ def letterbox(
 def blob(im: np.ndarray, return_seg: bool = False) -> Union[np.ndarray, Tuple[np.ndarray, np.ndarray]]:
     """
     Prepares an image for neural network processing, optionally including a segmentation map.
-    
+
     Parameters:
     - im: Input image as a NumPy ndarray with shape (height, width, channels).
     - return_seg: A boolean flag indicating whether to return a segmentation map along with the processed image.
-    
+
     Returns:
     - If return_seg is False, returns a single ndarray representing the processed image with shape (1, channels, height, width).
     - If return_seg is True, returns a tuple of two ndarrays: the processed image and its segmentation map.
@@ -334,7 +334,8 @@ def postprocess_segmentation(
         idx = cv2.dnn.NMSBoxesBatched(
             cvbboxes, scores, labels, confidence_threshold, iou_threshold)
     else:
-        idx = cv2.dnn.NMSBoxes(cvbboxes, scores, confidence_threshold, iou_threshold)
+        idx = cv2.dnn.NMSBoxes(
+            cvbboxes, scores, confidence_threshold, iou_threshold)
     bboxes, scores, labels, maskconf = (
         bboxes[idx],
         scores[idx],
@@ -359,7 +360,8 @@ def postprocess_segmentation(
         mask = cv2.resize(mask, (image_shape[1], image_shape[0]),
                           interpolation=cv2.INTER_LINEAR)
         mask = np.ascontiguousarray((mask > 0.5)[..., None], dtype=np.float32)
-        mask = mask[downsample_height: 640 - downsample_height, downsample_width: 640 - downsample_width]
+        mask = mask[downsample_height: 640 - downsample_height,
+                    downsample_width: 640 - downsample_width]
         contours, _ = cv2.findContours(
             (mask * 255).astype(np.uint8),
             cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
