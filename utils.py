@@ -10,7 +10,7 @@ W, H = 640, 640
 
 
 # COCO Segmentation CLASSES
-CLASSES_GENERAL = (
+CLASSES_GENERAL = [
     "person",
     "bicycle",
     "car",
@@ -91,7 +91,7 @@ CLASSES_GENERAL = (
     "teddy bear",
     "hair drier",
     "toothbrush",
-)
+]
 
 
 def get_image_from_url(url: str, rotation: int = 0) -> np.ndarray:

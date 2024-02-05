@@ -91,7 +91,7 @@ def run_coco_segmentation():
                 }
             )
             predicted_classes.add(object_class - 1)
-    segmentation_response = {"annotations": annotations,
+    segmentation_response = {"annotations": annotations,  "classes": CLASSES_GENERAL,
               "predicted_classes": list(predicted_classes)}
     return jsonify(segmentation_response)
 
@@ -145,6 +145,6 @@ def run_person_segmentation():
                 }
             )
             predicted_classes.add(object_class - 1)
-    segmentation_response = {"annotations": annotations,
-              "predicted_classes": list(predicted_classes)}
+    segmentation_response = {"annotations": annotations, "classes": ["Person"],
+              "predicted_classes": [object_class]}
     return jsonify(segmentation_response)
