@@ -65,7 +65,17 @@ docker-compose -f docker-compose-gpu.yml up -d --build
 4.  Local Testing
 Test the deployment locally to ensure everything is working correctly:
 
+
+
 ```bash
+# Using cURL
+curl -X POST http://localhost:8080/api/yolo8-coco-segmentation \
+     -H "Content-Type: application/json" \
+     -d '{"src":"https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg"}'
+```
+
+```bash
+Using a Python Script
 python service_test.py
 ```
 
