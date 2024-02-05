@@ -34,7 +34,7 @@ Ensure you have the following installed:
 
 - Docker (for containerized deployment)
 - Python 3.8 or higher
-- Docker Compose
+- Docker Compose (v2.20.2)
 - TensorRT (for GPU acceleration)
 - ONNX Runtime (for CPU deployment)
 
