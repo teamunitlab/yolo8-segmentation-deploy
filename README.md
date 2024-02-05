@@ -44,7 +44,7 @@ Ensure you have the following installed:
 Start by cloning this repository to your local system:
 
 ```bash
-git clone https://github.com/yourusername/yolo8-segmentation-deploy.git
+git clone https://github.com/teamunitlab/yolo8-segmentation-deploy.git
 cd yolo8-segmentation-deploy
 ```
 
