@@ -1,0 +1,31 @@
+FROM python:3.10.3-slim-bullseye
+
+# set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+RUN apt-get update \
+	&& apt-get install -y \
+	libfontconfig1 \
+	libglib2.0-0 \
+	libsm6 \
+	libxext6 \
+	libgl1 \
+	libxrender1 \
+	unzip \
+	wget \
+	&& rm -rf /var/lib/apt/lists/* 
+
+RUN rm -rf weights
+RUN mkdir weights
+
+RUN wget --progress=bar:force https://enterprise-unitlab.s3.us-east-2.amazonaws.com/weights/yolov8x-seg_model.onnx -O weights/model.onnx
+
+COPY ./requirement-cpu.txt .
+
+RUN pip install --upgrade pip
+
+# install dependencies
+RUN pip install -r requirement-cpu.txt
+
+COPY . .

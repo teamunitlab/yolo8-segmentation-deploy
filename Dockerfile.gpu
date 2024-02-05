@@ -1,0 +1,42 @@
+FROM nvcr.io/nvidia/tensorrt:23.03-py3
+
+ENV TZ=Europe/Minsk
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+RUN apt-get update \
+	&& apt-get install -y \
+	libfontconfig1 \
+	libglib2.0-0 \
+	libsm6 \
+	libxext6 \
+	libgl1 \
+	python3-pip \
+	libxrender1 \
+	unzip \
+	wget \
+	&& rm -rf /var/lib/apt/lists/* 
+
+
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1  
+
+
+RUN rm -rf weights
+RUN mkdir weights
+
+RUN wget --progress=bar:force https://enterprise-unitlab.s3.us-east-2.amazonaws.com/weights/generalx-seg.engine -O weights/model.engine
+
+
+COPY ./requirement-gpu.txt .
+
+RUN pip3 install --upgrade pip
+
+RUN pip3 install --extra-index-url=https://pypi.ngc.nvidia.com --trusted-host pypi.ngc.nvidia.com -r requirement-gpu.txt
+
+COPY . .
+
+ENV LC_ALL C.UTF-8
+ENV LANG C.UTF-8
+ENV NVIDIA_VISIBLE_DEVICES all
+ENV NVIDIA_DRIVER_CAPABILITIES compute,utility
+LABEL com.nvidia.volumes.needed="nvidia_driver"

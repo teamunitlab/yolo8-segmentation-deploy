@@ -1,0 +1,21 @@
+version: '2'
+
+services:
+  aiworker1_yolo8_onnx:
+    build:
+      context: ./
+      dockerfile: Dockerfile.cpu
+    environment:
+      - BACKEND_MODULE=ONNX
+    command: gunicorn --timeout 60  -k gevent -b unix:/tmp/gunicorn.sock -w 1 --bind 0.0.0.0:2121 serve.wsgi:app
+    ports:
+      - "2121:2121"
+
+  ngnix-cpu-worker:
+    image: nginx:alpine
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./enrtrypoint/proxy/nginx-cpu-worker.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - aiworker1_yolo8_onnx
