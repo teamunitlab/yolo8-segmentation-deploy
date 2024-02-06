@@ -1,4 +1,4 @@
-# YOLO8 Segmentation Deployment Using TensorRT and ONNX
+# YOLO8 Segmentation Deployment (TensorRT and ONNX)
 
 This repository offers a production-ready deployment solution for YOLO8 Segmentation using TensorRT and ONNX. It aims to provide a comprehensive guide and toolkit for deploying the state-of-the-art (SOTA) YOLO8-seg model from Ultralytics, supporting both CPU and GPU environments. Our focus is to ensure seamless integration of AI models, specifically the cutting-edge YOLOv8, into [Unitlab Annotate](http://unitlab.ai/) for enhanced object detection, instance segmentation, and other AI-driven tasks.
 
