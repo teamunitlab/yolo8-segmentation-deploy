@@ -41,6 +41,7 @@ Ensure you have the following installed:
 ### Installation
 
 1. Clone the Repository
+   
 Start by cloning this repository to your local system:
 
 ```bash
@@ -49,6 +50,7 @@ cd yolo8-segmentation-deploy
 ```
 
 2.  Build & Run for CPU
+   
 Use Docker Compose to deploy for CPU environments:
 
 ```bash
@@ -56,6 +58,7 @@ docker-compose -f docker-compose-cpu.yml up -d --build
 ```
 
 3.  Build & Run for GPU
+   
 For GPU acceleration, execute the following:
 
 ```bash
@@ -63,6 +66,7 @@ docker-compose -f docker-compose-gpu.yml up -d --build
 ```
 
 4.  Local Testing
+   
 Test the deployment locally to ensure everything is working correctly:
 
 
