@@ -94,7 +94,9 @@ python service_test.py
 MIT
 
 ### References
-1. https://github.com/ultralytics/ultralytics
-2. https://docs.unitlab.ai/ai-models/model-integration
-3. https://github.com/triple-Mu/YOLOv8-TensorRT
-4. http://unitlab.ai/
+1. http://unitlab.ai/
+2. https://blog.unitlab.ai/yolov8-segmentation-deployment/
+3. https://docs.unitlab.ai/ai-models/model-integration
+4. https://blog.unitlab.ai/unitlab-streamlined-data-annotation-platform-for-computer-vision/
+5. https://github.com/ultralytics/ultralytics
+6. https://github.com/triple-Mu/YOLOv8-TensorRT
